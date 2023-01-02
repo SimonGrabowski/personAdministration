@@ -103,5 +103,6 @@ public class MainFrame {
         dataEntryFrame.setResizable(false);
         dataEntryFrame.setLayout(null);
         dataEntryFrame.setVisible(true);
+        // TEST
     }
 }
