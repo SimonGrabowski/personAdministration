@@ -99,8 +99,6 @@ public class MainFrame {
         dataEntryPanel.add(inputFirstname);
         dataEntryFrame.add(dataEntryPanel);
 
-        panelLayout.putConstraint();
-
         dataEntryFrame.setSize(400, 400);
         dataEntryFrame.setResizable(false);
         dataEntryFrame.setLayout(null);
