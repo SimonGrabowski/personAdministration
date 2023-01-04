@@ -1,16 +1,22 @@
 package gui;
 
+import controller.OpenDataEntryWindow;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainFrame {
+public class MainFrame implements ActionListener {
+
+    private JButton createButton, deleteButton, importButton, exportButton;
 
     private String[][] data = {
             {"Kundan Kumar Jha", "4031", "CSE"},
             {"Anand Jha", "6014", "IT"}
     };
-    private String[] columnNames = { "Name", "Roll Number", "Department" };
+    private String[] columnNames = {"Name", "Roll Number", "Department"};
     private int defaultWidth;
     private int defaultHeight;
     private final LineBorder panelOutline = new LineBorder(Color.BLACK, 2);
@@ -42,7 +48,7 @@ public class MainFrame {
 
         JTable detailedPersonTable = new JTable(data, columnNames);
         JScrollPane detailedPersonScrollPane = new JScrollPane(detailedPersonTable);
-        detailedPersonScrollPane.setBounds(0,0, defaultWidth - 20, defaultHeight - 560);
+        detailedPersonScrollPane.setBounds(0, 0, defaultWidth - 20, defaultHeight - 560);
 
         detailTablePanel.setLayout(null);
         detailTablePanel.add(detailedPersonScrollPane);
@@ -52,14 +58,17 @@ public class MainFrame {
         buttonMenuPanel.setBounds(defaultWidth - 180, 10, defaultWidth - 630, defaultHeight - 300);
         buttonMenuPanel.setBorder(panelOutline);
 
-        JButton deleteButton = new JButton("Delete");
-        JButton createButton = new JButton("Create");
-        JButton importButton = new JButton("Import data");
-        JButton exportButton = new JButton("Export data");
+        deleteButton = new JButton("Delete");
+        createButton = new JButton("Create");
+        importButton = new JButton("Import data");
+        exportButton = new JButton("Export data");
         buttonMenuPanel.add(deleteButton);
         buttonMenuPanel.add(createButton);
         buttonMenuPanel.add(importButton);
         buttonMenuPanel.add(exportButton);
+
+        createButton.addActionListener(this);
+        deleteButton.addActionListener(this);
 
         mainWindow.add(nameTablePanel);
         mainWindow.add(detailTablePanel);
@@ -70,38 +79,11 @@ public class MainFrame {
         mainWindow.setSize(new Dimension(defaultWidth, defaultHeight));
         mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainWindow.setVisible(true);
-
     }
 
-    public void startDataEntryFrame() {
-        JFrame dataEntryFrame = new JFrame();
-        JPanel dataEntryPanel = new JPanel();
-        dataEntryPanel.setBounds(10,10, 380,380);
-
-        SpringLayout panelLayout = new SpringLayout();
-        dataEntryPanel.setLayout(panelLayout);
-
-        JLabel labelFirstname = new JLabel("Firstname:");
-        JLabel labelLastname = new JLabel("Lastname:");
-        JLabel labelAddress = new JLabel("Address:");
-        JLabel labelSalary = new JLabel("Salary");
-        JLabel labelAge = new JLabel("Age:");
-        JLabel labelJob = new JLabel("Job:");
-
-        JTextField inputFirstname = new JTextField();
-        JTextField inputLastname = new JTextField();
-        JTextField inputAddress = new JTextField();
-        JTextField inputSalary = new JTextField();
-        JTextField inputAge = new JTextField();
-        JTextField inputJob = new JTextField();
-
-        dataEntryPanel.add(labelFirstname);
-        dataEntryPanel.add(inputFirstname);
-        dataEntryFrame.add(dataEntryPanel);
-
-        dataEntryFrame.setSize(400, 400);
-        dataEntryFrame.setResizable(false);
-        dataEntryFrame.setLayout(null);
-        dataEntryFrame.setVisible(true);
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == createButton)
+        OpenDataEntryWindow.startDataEntryFrame();
     }
 }

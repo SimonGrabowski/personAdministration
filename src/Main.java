@@ -5,8 +5,5 @@ public class Main {
 
         MainFrame mainFrame = new MainFrame(800, 800);
         mainFrame.startGui();
-        mainFrame.startDataEntryFrame();
-        /*CreateJson createJson = new CreateJson();
-        createJson.createJsonFile();*/
     }
 }
