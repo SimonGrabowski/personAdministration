@@ -84,6 +84,6 @@ public class MainFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == createButton)
-        OpenDataEntryWindow.startDataEntryFrame();
+            OpenDataEntryWindow.startDataEntryFrame();
     }
 }
