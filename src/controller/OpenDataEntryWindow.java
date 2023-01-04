@@ -2,6 +2,8 @@ package controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class OpenDataEntryWindow {
     private static String[] labelNames = {
@@ -41,6 +43,13 @@ public class OpenDataEntryWindow {
         gridBagConstraints.anchor = GridBagConstraints.PAGE_END;
         gridBagConstraints.gridy = 6;
         dataEntryPanel.add(confirmButton, gridBagConstraints);
+
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dataEntryFrame.dispose();
+            }
+        });
 
         dataEntryFrame.add(dataEntryPanel);
         dataEntryFrame.setSize(300, 170);
