@@ -1,22 +1,18 @@
 package gui;
 
+import controller.ITableData;
 import controller.OpenDataEntryWindow;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainFrame implements ActionListener {
+public class MainFrame implements ActionListener, ITableData {
 
     private JButton createButton, deleteButton, importButton, exportButton;
-
-    private String[][] data = {
-            {"Kundan Kumar Jha", "4031", "CSE"},
-            {"Anand Jha", "6014", "IT"}
-    };
-    private String[] columnNames = {"Name", "Roll Number", "Department"};
     private int defaultWidth;
     private int defaultHeight;
     private final LineBorder panelOutline = new LineBorder(Color.BLACK, 2);
@@ -34,7 +30,11 @@ public class MainFrame implements ActionListener {
         nameTablePanel.setBounds(10, 10, defaultWidth - 200, defaultHeight - 300);
         nameTablePanel.setBorder(panelOutline);
 
-        JTable personTable = new JTable(data, columnNames);
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        for (int i = 0; i < columnNames.length; i++) {
+            defaultTableModel.addColumn(columnNames[i]);
+        }
+        JTable personTable = new JTable(defaultTableModel);
         JScrollPane personScrollPane = new JScrollPane(personTable);
 
         personScrollPane.setBounds(0, 0, defaultWidth - 200, defaultHeight - 300);
@@ -46,7 +46,7 @@ public class MainFrame implements ActionListener {
         detailTablePanel.setBounds(10, defaultHeight - 280, defaultWidth - 20, defaultHeight - 560);
         detailTablePanel.setBorder(panelOutline);
 
-        JTable detailedPersonTable = new JTable(data, columnNames);
+        JTable detailedPersonTable = new JTable(defaultTableModel);
         JScrollPane detailedPersonScrollPane = new JScrollPane(detailedPersonTable);
         detailedPersonScrollPane.setBounds(0, 0, defaultWidth - 20, defaultHeight - 560);
 

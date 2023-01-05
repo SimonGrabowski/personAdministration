@@ -2,8 +2,6 @@ package controller;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class OpenDataEntryWindow {
     private static String[] labelNames = {
@@ -46,32 +44,27 @@ public class OpenDataEntryWindow {
         gridBagConstraints.gridy = 6;
         dataEntryPanel.add(confirmButton, gridBagConstraints);
 
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                for (int i = 0; i < textFields.length - 1; i++) {
-                    if (textFields[i] != null && (textFields[i] != textFields[3] || textFields[i] != textFields[5])) {
-                        dataSet.setFirstName(textFields[0].getText());
-                        dataSet.setLastName(textFields[1].getText());
-                        dataSet.setAddress(textFields[2].getText());
-                        dataSet.setJob(textFields[4].getText());
-                    } else if (textFields[i] != null && (textFields[i] == textFields[3])) {
-                        dataSet.setSalary(Integer.parseInt(textFields[3].getText()));
-                    } else if (textFields[i] != null && textFields[i] == textFields[5]) {
-                        dataSet.setAge(Integer.parseInt(textFields[5].getText()));
-                    } else {
-                        dataSet.setFirstName("");
-                        dataSet.setLastName("");
-                        dataSet.setAddress("");
-                        dataSet.setSalary(0);
-                        dataSet.setJob("");
-                        dataSet.setAge(0);
-                    }
+        confirmButton.addActionListener(actionEvent -> {
+            for (int i = 0; i < textFields.length - 1; i++) {
+                if (textFields[i] != null && (textFields[i] != textFields[3] || textFields[i] != textFields[5])) {
+                    dataSet.setFirstName(textFields[0].getText());
+                    dataSet.setLastName(textFields[1].getText());
+                    dataSet.setAddress(textFields[2].getText());
+                    dataSet.setJob(textFields[4].getText());
+                } else if (textFields[i] != null && (textFields[i] == textFields[3])) {
+                    dataSet.setSalary(Integer.parseInt(textFields[3].getText()));
+                } else if (textFields[i] != null && textFields[i] == textFields[5]) {
+                    dataSet.setAge(Integer.parseInt(textFields[5].getText()));
+                } else {
+                    dataSet.setFirstName("");
+                    dataSet.setLastName("");
+                    dataSet.setAddress("");
+                    dataSet.setSalary(0);
+                    dataSet.setJob("");
+                    dataSet.setAge(0);
                 }
-
-
-                dataEntryFrame.dispose();
             }
+            dataEntryFrame.dispose();
         });
 
         dataEntryFrame.add(dataEntryPanel);
