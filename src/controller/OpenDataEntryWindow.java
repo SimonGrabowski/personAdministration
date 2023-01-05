@@ -9,6 +9,8 @@ public class OpenDataEntryWindow {
     private static String[] labelNames = {
             "Firstname", "Lastname", "Address:", "Salary:", "Job:", "Age:"
     };
+    private static JTextField[] textFields = new JTextField[6];
+
     private static JButton confirmButton;
     private static JFrame dataEntryFrame;
 
@@ -23,7 +25,6 @@ public class OpenDataEntryWindow {
 
         int labelIndex = 0;
         int textFieldIndex = 0;
-        JTextField[] textFields = new JTextField[6];
         for (int y = 0; y <= 5; y++) {
             for (int x = 0; x <= 1; x++) {
                 gridBagConstraints.gridx = x;
@@ -48,12 +49,27 @@ public class OpenDataEntryWindow {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                dataSet.setFirstName(textFields[0].getText());
-                dataSet.setLastName(textFields[1].getText());
-                dataSet.setAddress(textFields[2].getText());
-                dataSet.setSalary(Integer.parseInt(textFields[3].getText()));
-                dataSet.setJob(textFields[4].getText());
-                dataSet.setAge(Integer.parseInt(textFields[5].getText()));
+                for (int i = 0; i < textFields.length - 1; i++) {
+                    if (textFields[i] != null && (textFields[i] != textFields[3] || textFields[i] != textFields[5])) {
+                        dataSet.setFirstName(textFields[0].getText());
+                        dataSet.setLastName(textFields[1].getText());
+                        dataSet.setAddress(textFields[2].getText());
+                        dataSet.setJob(textFields[4].getText());
+                    } else if (textFields[i] != null && (textFields[i] == textFields[3])) {
+                        dataSet.setSalary(Integer.parseInt(textFields[3].getText()));
+                    } else if (textFields[i] != null && textFields[i] == textFields[5]) {
+                        dataSet.setAge(Integer.parseInt(textFields[5].getText()));
+                    } else {
+                        dataSet.setFirstName("");
+                        dataSet.setLastName("");
+                        dataSet.setAddress("");
+                        dataSet.setSalary(0);
+                        dataSet.setJob("");
+                        dataSet.setAge(0);
+                    }
+                }
+
+
                 dataEntryFrame.dispose();
             }
         });
