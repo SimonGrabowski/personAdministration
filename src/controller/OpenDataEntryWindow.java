@@ -9,11 +9,11 @@ public class OpenDataEntryWindow {
     private static String[] labelNames = {
             "Firstname", "Lastname", "Address:", "Salary:", "Job:", "Age:"
     };
-    public static JTextField[] textFields = new JTextField[5];
     private static JButton confirmButton;
     private static JFrame dataEntryFrame;
 
     public static void startDataEntryFrame() {
+        TableData dataSet = new TableData();
         dataEntryFrame = new JFrame();
         JPanel dataEntryPanel = new JPanel();
         dataEntryPanel.setSize(400, 400);
@@ -23,6 +23,7 @@ public class OpenDataEntryWindow {
 
         int labelIndex = 0;
         int textFieldIndex = 0;
+        JTextField[] textFields = new JTextField[6];
         for (int y = 0; y <= 5; y++) {
             for (int x = 0; x <= 1; x++) {
                 gridBagConstraints.gridx = x;
@@ -30,13 +31,13 @@ public class OpenDataEntryWindow {
                 if (x == 0) {
                     dataEntryPanel.add(new JLabel(labelNames[labelIndex]), gridBagConstraints);
                 } else {
-                    if (textFieldIndex != 5) {
+                    if (textFieldIndex < 6) {
                         dataEntryPanel.add(textFields[textFieldIndex] = new JTextField(20), gridBagConstraints);
+                        textFieldIndex++;
                     }
                 }
             }
             labelIndex++;
-
         }
 
         confirmButton = new JButton("Confirm");
@@ -47,6 +48,12 @@ public class OpenDataEntryWindow {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                dataSet.setFirstName(textFields[0].getText());
+                dataSet.setLastName(textFields[1].getText());
+                dataSet.setAddress(textFields[2].getText());
+                dataSet.setSalary(Integer.parseInt(textFields[3].getText()));
+                dataSet.setJob(textFields[4].getText());
+                dataSet.setAge(Integer.parseInt(textFields[5].getText()));
                 dataEntryFrame.dispose();
             }
         });
